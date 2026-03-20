@@ -1,0 +1,47 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Vajra Tasks</title>
+    <link
+      rel="stylesheet"
+      href="{% static 'css/style.css' %}?v={% now 'U' %}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1>⚡ Vajra Tasks</h1>
+
+      <form method="POST" action="{% url 'add_task' %}">
+        {% csrf_token %}
+        <input
+          type="text"
+          name="title"
+          placeholder="Add a new task..."
+          required
+        />
+        <button type="submit">Add</button>
+      </form>
+
+      <div class="actions">
+        <a href="{% url 'random_task' %}" class="vajra-btn"
+          >🔱 Random Task (Vajra)</a
+        >
+      </div>
+
+      <ul>
+        {% for task in tasks %}
+        <li class="{% if task.completed %}completed{% endif %}">
+          {{ task.title }} {% if not task.completed %}
+          <a href="{% url 'complete_task' task.id %}" class="complete">✔</a>
+          {% endif %}
+          <a href="{% url 'delete_task' task.id %}" class="delete">✖</a>
+        </li>
+        {% empty %}
+        <li>No tasks yet. Add one above!</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Random Task - Vajra</title>
+    {% load static %}
+    <link
+      rel="stylesheet"
+      href="{% static 'css/style.css' %}?v={% now 'U' %}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1>⚡ Vajra Chooses...</h1>
+      <div class="random-task">
+        <p>{{ task.title }}</p>
+      </div>
+      <div class="actions">
+        <a href="{% url 'task_list' %}" class="back">← Back to all tasks</a>
+        <a href="{% url 'random_task' %}" class="vajra-btn"
+          >🔱 Another random</a
+        >
+      </div>
+    </div>
+  </body>
+</html>
