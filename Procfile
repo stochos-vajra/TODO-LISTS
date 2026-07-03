@@ -1,1 +1,1 @@
-web: gunicorn stochastic_todo.wsgi
+web: python manage.py collectstatic --noinput && python manage.py migrate && gunicorn stochastic_todo.wsgi
